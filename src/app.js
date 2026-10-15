@@ -83,18 +83,18 @@ function getCategoryName(category) {
 
 function createOrder(table, items, waiter, tip) {
   let note = ""
-  note = note || "без приміток"
-  waiter = waiter || "Анонім"
-  return { table: table, items: items, waiter: waiter, tip: tip, note: note, guests: 2 }
+  note ||= "без приміток"
+  waiter ||= "Анонім"
+  return { table, items, waiter, tip, note, guests: 2 }
 }
 
 function addItem(order, id, qty) {
-  const entry = { id: id, qty: qty }
+  const entry = { id, qty }
   order.items.push(entry)
 }
 
 function formatName(label) {
-  label = label || "Без назви"
+  label ||= "Без назви"
   return label.trim()
 }
 
@@ -166,7 +166,7 @@ function printReport(list) {
   const cats = ["soup", "salad", "main", "dessert", "drink"]
   for (const cat of cats) {
     const names = menu
-      .filter(function (item) {
+      .filter((item) => {
         return item.category === cat
       })
       .map(item => item.name)
@@ -174,7 +174,7 @@ function printReport(list) {
   }
   console.log("")
   console.log("--- Підсумки ---")
-  const vegan = menu.filter(function (item) {
+  const vegan = menu.filter((item) => {
     return item.vegan
   })
   console.log("Веганських страв: " + vegan.length)
