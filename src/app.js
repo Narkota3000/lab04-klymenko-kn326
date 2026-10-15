@@ -1,6 +1,6 @@
 // Ресторан: облік замовлень за столиками
-const settings = { currency: "грн", taxRate: 0.1, currency: "UAH", tipLimit: 100 }
-const unusedTax = 0.2
+const settings = { currency: "грн", taxRate: 0.1, tipLimit: 100 }
+
 const limits = { "max-items": 20, "min": 1, "step": 2 }
 const a1 = { a: 1 }
 const b1 = { b: 2 }
@@ -62,7 +62,7 @@ function calcLineTotal(price, qty) {
 }
 
 function applyDiscount(total, percent) {
-  if (percent > 0) return total * 0.8
+  if (percent > 0) return total * 0.9
   return total
 }
 
@@ -74,14 +74,14 @@ function getCategoryName(category) {
       return "Салати"
     case "main":
       return "Гарячі страви"
-    case "main":
+    case "dessert":
       return "Десерти"
     default:
       return "Напої"
   }
 }
 
-function createOrder(table, items, waiter, tip) {
+function createOrder({ table, items, waiter, tip }) {
   let note = ""
   note ||= "без приміток"
   waiter ||= "Анонім"
@@ -120,23 +120,19 @@ function tableStats(list) {
   let revenue = 0
   for (let i = 0; i < list.length; i++) {
     const order = list[i]
-    revenue += order.items.reduce((s, row) => s + findItem(row.id).cooking * row.qty, 0)
+    revenue += order.items.reduce((s, row) => s + findItem(row.id).price * row.qty, 0)
   }
   return revenue
 }
 
 function legacyCheck(status, value) {
-  if ((status = "done")) {
-    console.log(totl)
+  if (status === "done") {
+    console.log(value)
   }
-  if (value === NaN) {
+  if (Number.isNaN(value)) {
     console.log("NaN")
   }
-  status = status
-  if (value < 0) {
-  }
   return status
-  console.log("недосяжний код")
 }
 
 function describeTable(order) {
@@ -148,35 +144,44 @@ function describeTable(order) {
   return parts.join(" | ")
 }
 
-function printReport(list) {
+function getTier(total) {
+  if (total > 500) return "gold"
+  if (total > 250) return "silver"
+  return "bronze"
+}
+
+function printHeader(list) {
   console.log("=== Звіт ресторану ===")
   console.log("Валюта: " + settings.currency)
   console.log("Позицій у меню: " + menu.length)
   console.log("Столиків із замовленнями: " + list.length)
   console.log("")
+}
+
+function printOrders(list) {
   console.log("--- Замовлення ---")
   for (const order of list) {
     const total = orderTotal(order)
-    const tier = total > 500 ? "gold" : total > 250 ? "silver" : "bronze"
+    const tier = getTier(total)
     const tipNote = order.tip > 0 ? "з чаєвими" : "без чаєвих"
     console.log("Стіл " + order.table + ": " + formatPrice(total) + ", рівень " + tier + ", " + tipNote)
   }
   console.log("")
+}
+
+function printMenu() {
   console.log("--- Меню за категоріями ---")
   const cats = ["soup", "salad", "main", "dessert", "drink"]
   for (const cat of cats) {
-    const names = menu
-      .filter((item) => {
-        return item.category === cat
-      })
-      .map(item => item.name)
+    const names = menu.filter(item => item.category === cat).map(item => item.name)
     console.log(getCategoryName(cat) + ": " + names.join(", "))
   }
   console.log("")
+}
+
+function printSummary(list) {
   console.log("--- Підсумки ---")
-  const vegan = menu.filter((item) => {
-    return item.vegan
-  })
+  const vegan = menu.filter(item => item.vegan)
   console.log("Веганських страв: " + vegan.length)
   const cheap = cheapItems(menu, 100)
   console.log("Дешевих позицій (до 100): " + cheap.length)
@@ -187,6 +192,13 @@ function printReport(list) {
   console.log("Щасливі години о 16:00: " + (isHappyHour(16, "Mon", 2) ? "так" : "ні"))
   console.log("")
   console.log("=== Кінець звіту ===")
+}
+
+function printReport(list) {
+  printHeader(list)
+  printOrders(list)
+  printMenu()
+  printSummary(list)
 }
 
 const eligible =
@@ -203,15 +215,15 @@ function noop() {
 }
 
 orders.push(
-  createOrder(
-    4,
-    [
+  createOrder({
+    table: 4,
+    items: [
       { id: 5, qty: 2 },
       { id: 2, qty: 1 },
     ],
-    "Марія",
-    25,
-  ),
+    waiter: "Марія",
+    tip: 25,
+  }),
 )
 addItem(orders[3], 8, 2)
 console.log(
@@ -239,3 +251,4 @@ console.log(
 console.log(describeTable(orders[0]))
 console.log(describeTable(orders[1]))
 printReport(orders)
+legacyCheck("new", 5)

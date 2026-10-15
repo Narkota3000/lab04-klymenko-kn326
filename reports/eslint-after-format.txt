@@ -1,0 +1,31 @@
+[0m
+[4mC:\Users\rklim\Desktop\Lab04_Klymenko_KN326\src\app.js[24m
+    [2m2:51[22m  [31merror[39m    Duplicate key 'currency'                                                  [2mno-dupe-keys[22m
+    [2m3:7[22m   [31merror[39m    'unusedTax' is assigned a value but never used                            [2mno-unused-vars[22m
+   [2m77:5[22m   [31merror[39m    Duplicate case label                                                      [2mno-duplicate-case[22m
+   [2m84:1[22m   [31merror[39m    Function 'createOrder' has too many parameters (4). Maximum allowed is 3  [2mmax-params[22m
+   [2m86:3[22m   [33mwarning[39m  Assignment (=) can be replaced with operator assignment (||=)             [2mlogical-assignment-operators[22m
+   [2m87:3[22m   [33mwarning[39m  Assignment (=) can be replaced with operator assignment (||=)             [2mlogical-assignment-operators[22m
+   [2m88:12[22m  [33mwarning[39m  Expected property shorthand                                               [2mobject-shorthand[22m
+   [2m88:26[22m  [33mwarning[39m  Expected property shorthand                                               [2mobject-shorthand[22m
+   [2m88:40[22m  [33mwarning[39m  Expected property shorthand                                               [2mobject-shorthand[22m
+   [2m88:56[22m  [33mwarning[39m  Expected property shorthand                                               [2mobject-shorthand[22m
+   [2m88:66[22m  [33mwarning[39m  Expected property shorthand                                               [2mobject-shorthand[22m
+   [2m92:19[22m  [33mwarning[39m  Expected property shorthand                                               [2mobject-shorthand[22m
+   [2m92:27[22m  [33mwarning[39m  Expected property shorthand                                               [2mobject-shorthand[22m
+   [2m97:3[22m   [33mwarning[39m  Assignment (=) can be replaced with operator assignment (||=)             [2mlogical-assignment-operators[22m
+  [2m128:10[22m  [31merror[39m    'legacyCheck' is defined but never used                                   [2mno-unused-vars[22m
+  [2m129:8[22m   [31merror[39m    Unexpected constant condition                                             [2mno-constant-condition[22m
+  [2m130:17[22m  [31merror[39m    'totl' is not defined                                                     [2mno-undef[22m
+  [2m132:7[22m   [31merror[39m    Use the isNaN function to compare with NaN                                [2muse-isnan[22m
+  [2m135:12[22m  [31merror[39m    'status' is assigned to itself                                            [2mno-self-assign[22m
+  [2m136:18[22m  [31merror[39m    Empty block statement                                                     [2mno-empty[22m
+  [2m139:3[22m   [31merror[39m    Unreachable code                                                          [2mno-unreachable[22m
+  [2m151:1[22m   [31merror[39m    Function 'printReport' has too many lines (40). Maximum allowed is 30     [2mmax-lines-per-function[22m
+  [2m160:18[22m  [33mwarning[39m  Do not nest ternary expressions                                           [2mno-nested-ternary[22m
+  [2m169:15[22m  [31merror[39m    Unexpected function expression                                            [2mprefer-arrow-callback[22m
+  [2m177:29[22m  [31merror[39m    Unexpected function expression                                            [2mprefer-arrow-callback[22m
+
+[31m[1m✖ 25 problems (14 errors, 11 warnings)[22m[39m
+[31m[1m  2 errors and 10 warnings potentially fixable with the `--fix` option.[22m[39m
+[0m
