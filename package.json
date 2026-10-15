@@ -4,12 +4,12 @@
   "description": "",
   "main": "eslint.config.js",
   "scripts": {
-  "format": "prettier --write .",
-  "format:check": "prettier --check .",
-  "lint": "eslint .",
-  "lint:fix": "eslint . --fix",
-  "check": "prettier --check . && eslint . --max-warnings 0"
-},
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "check": "prettier --check . && eslint . --max-warnings 0"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

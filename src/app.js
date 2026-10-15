@@ -1,55 +1,80 @@
 // Ресторан: облік замовлень за столиками
 const settings = { currency: "грн", taxRate: 0.1, currency: "UAH", tipLimit: 100 }
-const unusedTax = 0.2;
-const limits = { 'max-items': 20, "min": 1, step: 2 };
-const a1 = {a: 1}
+const unusedTax = 0.2
+const limits = { "max-items": 20, "min": 1, "step": 2 }
+const a1 = { a: 1 }
 const b1 = { b: 2 }
 const tiny = {
-  x: 1, y: 2 }
-const zone = { name: "зал", seats: 4,
-  floor: 'перший' }
+  x: 1,
+  y: 2,
+}
+const zone = { name: "зал", seats: 4, floor: "перший" }
 const greeting = "I'm here"
-const welcome = 'Ласкаво просимо';
+const welcome = "Ласкаво просимо"
 
 const menu = [
-  { id: 1, name: "Борщ", category: 'soup', price: 120, cooking: 15, vegan: false },
-  {id: 2, name: 'Caesar', category: "salad", price: 150, cooking: 10, vegan: false,},
-  { id: 3, name: "Піца Маргарита", category: 'main', price: 210, cooking: 25, vegan: true },
-  { id: 4, name: 'Стейк',
-    category: "main", price: 480, cooking: 30, vegan: false, },
-  { id: 5, name: "Паста", category: 'main', price: 190, cooking: 20, vegan: false },
-  { id: 6, name: 'Чізкейк', category: "dessert", price: 130, cooking: 5, vegan: false },
-  { id: 7, name: "Лимонад", category: 'drink', price: 70, cooking: 3, vegan: true },
-  { id: 8, name: 'Кава', category: "drink", price: 60, cooking: 4, vegan: true }
+  { id: 1, name: "Борщ", category: "soup", price: 120, cooking: 15, vegan: false },
+  { id: 2, name: "Caesar", category: "salad", price: 150, cooking: 10, vegan: false },
+  { id: 3, name: "Піца Маргарита", category: "main", price: 210, cooking: 25, vegan: true },
+  { id: 4, name: "Стейк", category: "main", price: 480, cooking: 30, vegan: false },
+  { id: 5, name: "Паста", category: "main", price: 190, cooking: 20, vegan: false },
+  { id: 6, name: "Чізкейк", category: "dessert", price: 130, cooking: 5, vegan: false },
+  { id: 7, name: "Лимонад", category: "drink", price: 70, cooking: 3, vegan: true },
+  { id: 8, name: "Кава", category: "drink", price: 60, cooking: 4, vegan: true },
 ]
 
-
-
 const orders = [
-  { table: 1, guests: 2, waiter: "Олена", tip: 30, items: [{ id: 1, qty: 2 }, { id: 3, qty: 1 }] },
-  { table: 2, guests: 5, waiter: 'Іван', tip: 0, items: [{ id: 4, qty: 3 }, { id: 7, qty: 5 }, {id: 6, qty: 2}], },
-  { table: 3, guests: 1, waiter: "Олена", tip: 15, items: [{ id: 8, qty: 1 }, { id: 6, qty: 1 }] }
-]   
+  {
+    table: 1,
+    guests: 2,
+    waiter: "Олена",
+    tip: 30,
+    items: [
+      { id: 1, qty: 2 },
+      { id: 3, qty: 1 },
+    ],
+  },
+  {
+    table: 2,
+    guests: 5,
+    waiter: "Іван",
+    tip: 0,
+    items: [
+      { id: 4, qty: 3 },
+      { id: 7, qty: 5 },
+      { id: 6, qty: 2 },
+    ],
+  },
+  {
+    table: 3,
+    guests: 1,
+    waiter: "Олена",
+    tip: 15,
+    items: [
+      { id: 8, qty: 1 },
+      { id: 6, qty: 1 },
+    ],
+  },
+]
 
-function calcLineTotal(price,qty){
-   return price*qty;
+function calcLineTotal(price, qty) {
+  return price * qty
 }
 
 function applyDiscount(total, percent) {
-	if (percent > 0) 
-        return total * 0.8;
-    return total
+  if (percent > 0) return total * 0.8
+  return total
 }
 
 function getCategoryName(category) {
   switch (category) {
-    case 'soup':
+    case "soup":
       return "Супи"
     case "salad":
-      return 'Салати'
-    case 'main':
+      return "Салати"
+    case "main":
       return "Гарячі страви"
-    case 'main':
+    case "main":
       return "Десерти"
     default:
       return "Напої"
@@ -57,15 +82,15 @@ function getCategoryName(category) {
 }
 
 function createOrder(table, items, waiter, tip) {
-   let note = ""
-   note = note || "без приміток"
-   waiter = waiter || "Анонім"
-	return { table: table, items: items, waiter: waiter, tip: tip, note: note, guests: 2 };
+  let note = ""
+  note = note || "без приміток"
+  waiter = waiter || "Анонім"
+  return { table: table, items: items, waiter: waiter, tip: tip, note: note, guests: 2 }
 }
 
 function addItem(order, id, qty) {
-        const entry = { id: id, qty: qty }
-        order.items.push(entry);
+  const entry = { id: id, qty: qty }
+  order.items.push(entry)
 }
 
 function formatName(label) {
@@ -88,10 +113,7 @@ function orderTotal(order) {
 }
 
 function isHappyHour(hour, day, guests) {
-  return (hour >= 15 &&
-    hour < 18) || (day === "Sat" &&
- hour >= 12) ||
-      (guests > 4 && hour < 15 && day !== "Mon")
+  return (hour >= 15 && hour < 18) || (day === "Sat" && hour >= 12) || (guests > 4 && hour < 15 && day !== "Mon")
 }
 
 function tableStats(list) {
@@ -104,12 +126,15 @@ function tableStats(list) {
 }
 
 function legacyCheck(status, value) {
-  if (status = "done") {
+  if ((status = "done")) {
     console.log(totl)
   }
-  if (value === NaN) { console.log("NaN") }
+  if (value === NaN) {
+    console.log("NaN")
+  }
   status = status
-  if (value < 0) {}
+  if (value < 0) {
+  }
   return status
   console.log("недосяжний код")
 }
@@ -140,7 +165,11 @@ function printReport(list) {
   console.log("--- Меню за категоріями ---")
   const cats = ["soup", "salad", "main", "dessert", "drink"]
   for (const cat of cats) {
-    const names = menu.filter(function (item) { return item.category === cat }).map(item => item.name)
+    const names = menu
+      .filter(function (item) {
+        return item.category === cat
+      })
+      .map(item => item.name)
     console.log(getCategoryName(cat) + ": " + names.join(", "))
   }
   console.log("")
@@ -160,18 +189,53 @@ function printReport(list) {
   console.log("=== Кінець звіту ===")
 }
 
-const eligible = (orders[0].guests >= 4 && orders[0].tip > 10) || (orders[0].waiter === "Олена" && orders[0].tip > settings.tipLimit) ||
-  (orders[1].table % 2 === 0 &&
-orders[1].guests > 2 && orders[1].items.length > 2)
-let p = 1; let q = 2; console.log(p+q)
-const doubled = [1,2,3].map((x) => x * 2)
+const eligible =
+  (orders[0].guests >= 4 && orders[0].tip > 10) ||
+  (orders[0].waiter === "Олена" && orders[0].tip > settings.tipLimit) ||
+  (orders[1].table % 2 === 0 && orders[1].guests > 2 && orders[1].items.length > 2)
+let p = 1
+let q = 2
+console.log(p + q)
+const doubled = [1, 2, 3].map(x => x * 2)
 const incremented = [1, 2, 3].map(y => y + 1)
-function noop() { return 1 }
+function noop() {
+  return 1
+}
 
-orders.push(createOrder(4, [{ id: 5, qty: 2 }, { id: 2, qty: 1 }], "Марія", 25))
+orders.push(
+  createOrder(
+    4,
+    [
+      { id: 5, qty: 2 },
+      { id: 2, qty: 1 },
+    ],
+    "Марія",
+    25,
+  ),
+)
 addItem(orders[3], 8, 2)
-console.log(greeting, welcome, formatName("  Ресторан  "), "Службові значення:", a1.a + b1.b, tiny.x, zone.seats, limits.step, limits['max-items'], noop())
-console.log("Подвоєно:", doubled.join(","), "Збільшено:", incremented.join(","), "Рядок із п'яти аргументів, щоб перевищити ліміт довжини", eligible, 1, 2)
+console.log(
+  greeting,
+  welcome,
+  formatName("  Ресторан  "),
+  "Службові значення:",
+  a1.a + b1.b,
+  tiny.x,
+  zone.seats,
+  limits.step,
+  limits["max-items"],
+  noop(),
+)
+console.log(
+  "Подвоєно:",
+  doubled.join(","),
+  "Збільшено:",
+  incremented.join(","),
+  "Рядок із п'яти аргументів, щоб перевищити ліміт довжини",
+  eligible,
+  1,
+  2,
+)
 console.log(describeTable(orders[0]))
 console.log(describeTable(orders[1]))
 printReport(orders)
